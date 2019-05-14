@@ -43,9 +43,9 @@ xic=np.loadtxt('../Code/cap_vec.res')
 X=xic.T.ravel().reshape((-1,1))
 
 
-import myLOBPCG
+import myLOBPCG_new
 X=xic.T.ravel().reshape((-1,1))
-res=myLOBPCG.lobpcg(A,X,verbosityLevel=0,largest=False,maxiter=10000,retLambdaHistory=True)
+res=myLOBPCG_new.lobpcg(A,None,X,verbosityLevel=0,largest=False,maxiter=10000,retLambdaHistory=True)
 print res[0]
 print len(res[2])
 

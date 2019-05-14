@@ -71,7 +71,7 @@ def _makeOperator(operatorInput, expectedShape):
 
     return operator
 
-class _makeOperatorhalf(object):
+class _makeOperatorhalfAB(object):
     def __init__(self,Ahalf,Bhalf,expectedShape):
         self.dtype=Ahalf.dtype
         self.Ahalf=Ahalf
@@ -79,6 +79,13 @@ class _makeOperatorhalf(object):
     def __call__(self,X):
         return self.Ahalf.T.dot(self.Ahalf.dot(X))+self.Bhalf.T.dot(self.Bhalf.dot(X))
 
+
+class _makeOperatorhalfA(object):
+    def __init__(self,Ahalf,expectedShape):
+        self.dtype=Ahalf.dtype
+        self.Ahalf=Ahalf
+    def __call__(self,X):
+        return self.Ahalf.T.dot(self.Ahalf.dot(X))
 
 def _applyConstraints(blockVectorV, factYBY, blockVectorBY, blockVectorY):
     """Changes blockVectorV in place."""
@@ -253,8 +260,10 @@ def lobpcg(Ahalf,Bhalf, X,
     n, sizeX = blockVectorX.shape
     if sizeX > n:
         raise ValueError('X column dimension exceeds the row dimension')
-
-    A = _makeOperatorhalf(Ahalf,Bhalf, (n,n))
+    if Bhalf==None:
+        A = _makeOperatorhalfA(Ahalf, (n,n))
+    else:
+        A = _makeOperatorhalfAB(Ahalf,Bhalf, (n,n))
     B = _makeOperator(B, (n,n))
     M = _makeOperator(M, (n,n))
 

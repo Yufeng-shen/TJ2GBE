@@ -1,0 +1,9 @@
+*.pyc
+*.pickle
+*.py_bak
+*.log
+*.prof
+*.out
+*.o
+
+.ipynb_checkpoints/

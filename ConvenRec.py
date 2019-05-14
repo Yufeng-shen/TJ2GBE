@@ -43,17 +43,12 @@ xic=np.loadtxt('../Code/cap_vec.res')
 X=xic.T.ravel().reshape((-1,1))
 
 
-
-# In[ ]:
-
 import myLOBPCG
 X=xic.T.ravel().reshape((-1,1))
 res=myLOBPCG.lobpcg(A,X,verbosityLevel=0,largest=False,maxiter=10000,retLambdaHistory=True)
 print res[0]
 print len(res[2])
 
-
-# In[10]:
 
 a=res[1][:,0].reshape((-1,1))*486
 tmp=np.hstack([a[:36*9**4],a[36*9**4:2*36*9**4],a[2*36*9**4:]])

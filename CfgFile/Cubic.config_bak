@@ -1,0 +1,27 @@
+##############################################
+
+#number of TJ
+    60000
+
+#TJ file
+    triples_60000.dat
+
+#maximum number of neighbors, usually 30 is fine
+    30
+
+#threshold for neighbor, depends on the number of TJ, most GBs should have ~ 10 neighbors
+    0.03
+
+###############################################
+
+#symmetry file
+    symmetry.prp
+
+#subdomain: PI/a, PI/b, PI/c, PI/d, PI/e; 
+    2   2   2   2   0.5
+
+#n1, n2, n3, n4, n5;
+    9   9   9   9   36
+
+#ksym
+    36

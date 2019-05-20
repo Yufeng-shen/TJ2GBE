@@ -40,14 +40,14 @@ void TJ::find_neighbor(){
                         int q=subdomain.qs[subdomain.cumnum[cellid]+jj];
                         Matrix4<double> b2=q2bx(q,bs[bID]);
                         double x= distance(b1,b2);
-                        if(x<threshold){
+                        if(x<cfg.threshold){
                             idxbs[kk*cfg.maxNeighbor+nn]=bID;
                             disbs[kk*cfg.maxNeighbor+nn]=x;
                             Matrix3<double> M2=normal_transformer(q,bs[bID]);
                             Matrix3<float> M=Minv.dot(M2);
                             for(int iii=0;iii<3;iii++)
                                 for(int jjj=0;jjj<3;jjj++)
-                                    Tranbs[kk*cfg.maxNeighbor*9+nn*9+iii*3+jjj]=M(iii,jjj);
+                                    Tranbs[kk*cfg.maxNeighbor*9+nn*9+iii*3+jjj]=M.Get(iii,jjj);
                             nn+=1;
                         }
                     }
@@ -170,7 +170,7 @@ Matrix3<double> TJ::normal_transformer(int q, const Matrix4<double> b){
         M=gcsym[i];
     }
     else if((isignum)&&(!istranspose)){
-        M=-gcsym[i]
+        M=-gcsym[i];
     }
     else if((!isignum)&&(istranspose)){
         Matrix3<double> tmp;
@@ -200,9 +200,10 @@ Matrix4<double> TJ::q2bx(int q, const Matrix4<double> b){
     }
     else{
         q=q-1;
+        Matrix4<double> bb;
         int isignum=0;
         if(q>=2*nselau*nselau){
-            Matrix4<double> bb= b.Transpose();
+            bb= b.Transpose();
             q=q-2*nselau*nselau;
             if(q>=nselau*nselau){
                 q=q-nselau*nselau;
@@ -210,7 +211,7 @@ Matrix4<double> TJ::q2bx(int q, const Matrix4<double> b){
             }
         }
         else{
-            Matrix4<double> bb=b;
+            bb=b;
             if(q>=nselau*nselau){
                 q=q-nselau*nselau;
                 isignum=1;
@@ -243,8 +244,6 @@ Matrix4<double> TJ::bconvert(const Matrix3<double> gx, const Vector3<double> xn)
     for(int ii=0;ii<3;ii++){
         b.Set(ii,3)=xn.Get(ii);
     }
-    double gtn[3];
-    double gt[9];
     Vector3<double> gtn= gx.Transpose().dot(xn);
     for(int jj=0;jj<3;jj++){
         b.Set(3,jj)=-gtn.Get(jj);
@@ -370,7 +369,7 @@ void TJ::readTJ(string filename){
         Vector3<double> cn3;
         Matrix3<double> gx3;
         unsigned int TJid;
-        for(int ii=0;ii<numTJ;ii++){
+        for(int ii=0;ii<cfg.numTJ;ii++){
             inputFile >> TJid;
             for(int jj=0;jj<3;jj++){inputFile>>sl.Set(jj);}
             sl.Normalize();

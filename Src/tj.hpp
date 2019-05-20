@@ -3,6 +3,7 @@
 
 #include "math.hpp"
 #include "config.hpp"
+#include "subdomain.hpp"
 #include <vector>
 
 using std::vector;

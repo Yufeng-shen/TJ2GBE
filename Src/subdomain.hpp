@@ -1,6 +1,7 @@
 #ifndef TJ2GBE_SUBDOMAIN_HPP
 #define TJ2GBE_SUBDOMAIN_HPP
 
+
 class Subdomain{
     private:
         double fmax [5]; // subdomain max

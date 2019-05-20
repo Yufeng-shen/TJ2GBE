@@ -1,4 +1,6 @@
 #include "subdomain.hpp"
+#include <cmath>
+#include <algorithm>
 
 void Subdomain::initialize(const double* fmax_, const int* n_,
         unsigned int numGB,  int numSym){

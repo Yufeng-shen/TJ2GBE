@@ -55,6 +55,16 @@ class Matrix3{
                 }
             }
         }
+        inline Matrix3< _Scalar> operator-() const {
+            Matrix3<_Scalar> res;
+            for(int ii=0;ii<3;ii++){
+                for(int jj=0;jj<3;jj++){
+                    res.Set(ii,jj)=-m[ii][jj];
+                }
+            }
+            return res;
+        }
+
         inline _Scalar & Set(int i,int j){return m[i][j];}
         inline _Scalar Get(int i,int j) const {return m[i][j];}
         inline Matrix3 < _Scalar > Transpose() const{

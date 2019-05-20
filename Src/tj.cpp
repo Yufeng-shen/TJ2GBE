@@ -8,6 +8,231 @@ void TJ::cal_idxcell(){
    } 
 }
 
+void TJ::find_neighbor(){
+    std::cout<<"start finding neighbor..."<<std::endl;
+    idxbs = new unsigned int [numGB*cfg.maxNeighbor]();
+    disbs = new float [numGB*cfg.maxNeighbor]();
+    Tranbs= new float [numGB*cfg.maxNeighbor*9]();
+    NN.reserve(numGB);
+
+    subdomain.count_each_cell(idxcell,Qs);
+
+#pragma omp parallel for
+    for(long int kk=0;kk<numGB;kk++){
+        unsigned int* cells=&idxcell[kk*cfg.ksym];
+        int* theQs=&Qs[kk*cfg.ksym];
+        Matrix4<double> b0=bs[kk];
+        int nn=0;
+        for(int ii=0;ii<cfg.ksym;ii++){
+            unsigned int cellid=cells[ii];
+            int Q=theQs[ii];
+            Matrix4<double> b1=q2bx(Q,b0);
+            Matrix3<double> M=normal_transformer(Q,b0);
+            Matrix3<double> Minv=M.Transpose();
+            for(int jj=0;jj<subdomain.num[cellid];jj++){
+                bool firstMet=true;
+                unsigned int bID=subdomain.ids[subdomain.cumnum[cellid]+jj];
+                if(bID!=kk){
+                    for(int ll=0;ll<nn;ll++){
+                        firstMet=firstMet && (bID!=idxbs[kk*cfg.maxNeighbor+ll]);
+                    }
+                    if(firstMet){
+                        int q=subdomain.qs[subdomain.cumnum[cellid]+jj];
+                        Matrix4<double> b2=q2bx(q,bs[bID]);
+                        double x= distance(b1,b2);
+                        if(x<threshold){
+                            idxbs[kk*cfg.maxNeighbor+nn]=bID;
+                            disbs[kk*cfg.maxNeighbor+nn]=x;
+                            Matrix3<double> M2=normal_transformer(q,bs[bID]);
+                            Matrix3<float> M=Minv.dot(M2);
+                            for(int iii=0;iii<3;iii++)
+                                for(int jjj=0;jjj<3;jjj++)
+                                    Tranbs[kk*cfg.maxNeighbor*9+nn*9+iii*3+jjj]=M(iii,jjj);
+                            nn+=1;
+                        }
+                    }
+                }
+                if(nn==cfg.maxNeighbor){break;}
+            }
+            if(nn==cfg.maxNeighbor){break;}
+        }
+        NN[kk]=nn;
+    }
+}
+
+void TJ::make_A(){
+    int row_i=0;
+    for(int kk=0;kk<numGB;kk++){
+        for(int ii=0;ii<NN[kk];ii++){
+            int idx=idxbs[kk*cfg.maxNeighbor+ii];
+            float dis=disbs[kk*cfg.maxNeighbor+ii];
+            float w=sqrt((1-dis/cfg.threshold+EPS)/NN[kk]);
+            float* M=&Tranbs[kk*cfg.maxNeighbor*9+ii*9];
+            Addrow(row_i,kk*3,-w);
+            Addrow(row_i+1,kk*3+1,-w);
+            Addrow(row_i+2,kk*3+2,-w);
+            Addrow(row_i,idx*3,w*M[0]);
+            Addrow(row_i,idx*3+1,w*M[1]);
+            Addrow(row_i,idx*3+2,w*M[2]);
+            Addrow(row_i+1,idx*3,w*M[3]);
+            Addrow(row_i+1,idx*3+1,w*M[4]);
+            Addrow(row_i+1,idx*3+2,w*M[5]);
+            Addrow(row_i+2,idx*3,w*M[6]);
+            Addrow(row_i+2,idx*3+1,w*M[7]);
+            Addrow(row_i+2,idx*3+2,w*M[8]);
+            row_i+=3;
+        }
+    }
+}
+
+void TJ::write_idxcell(){
+    ofstream outputFile("idxcell.txt");
+    if(outputFile.is_open()){
+        for(unsigned int ii=0;ii<numGB;ii++){
+            for(int jj=0;jj<cfg.ksym;jj++){
+                outputFile << idxcell[ii*cfg.ksym+jj]<<"\t";
+            }
+            outputFile << std::endl;
+        }
+    }
+    else{
+        std::cout<<"Writing idxcell.txt failed"<<std::endl;
+    }
+}
+
+void TJ::write_neighborInfo(){
+    ofstream outputFile("idxbs.txt");
+    if(outputFile.is_open()){
+        for(unsigned int ii=0;ii<numGB;ii++){
+            for(int jj=0;jj<cfg.maxNeighbor;jj++){
+                outputFile << idxbs[ii*cfg.maxNeighbor+jj]<<"\t";
+            }
+            outputFile << std::endl;
+        }
+    }
+    else{
+        std::cout<<"Writing idxbs.txt failed"<<std::endl;
+    }
+    ofstream outputFile2("disbs.txt");
+    if(outputFile2.is_open()){
+        for(unsigned int ii=0;ii<numGB;ii++){
+            for(int jj=0;jj<cfg.maxNeighbor;jj++){
+                outputFile2 << disbs[ii*cfg.maxNeighbor+jj]<<"\t";
+            }
+            outputFile2 << std::endl;
+        }
+    }
+    else{
+        std::cout<<"Writing disbs.txt failed"<<std::endl;
+    }
+    ofstream outputFile3("NN.txt");
+    if(outputFile3.is_open()){
+        for(unsigned int ii=0;ii<numGB;ii++){
+                outputFile3 << NN[ii]<<std::endl;
+        }
+    }
+    else{
+        std::cout<<"Writing NN.txt failed"<<std::endl;
+    }
+}
+
+void TJ::write_A(){
+    ofstream rowFile("rowA.binary",std::ios::binary);
+    rowFile.write((char *)&rowA[0],rowA.size()*sizeof(int));
+    rowFile.close();
+    ofstream colFile("colA.binary",std::ios::binary);
+    colFile.write((char *)&colA[0],colA.size()*sizeof(int));
+    colFile.close();
+    ofstream valFile("valA.binary",std::ios::binary);
+    valFile.write((char *)&valA[0],valA.size()*sizeof(float));
+    valFile.close();
+}
+
+
+Matrix3<double> TJ::normal_transformer(int q, const Matrix4<double> b){
+    Matrix3<double> M;
+    q=q-1;
+    bool isignum=false;
+    bool istranspose=false;
+    if(q>=2*nselau*nselau){
+        q=q-2*nselau*nselau;
+        istranspose=true;
+    }
+    if(q>=nselau*nselau){
+        q=q-nselau*nselau;
+        isignum=true;
+    }
+    int i,j;
+    i=int(q/nselau);
+    j=q % nselau;
+
+    if((!isignum)&&(!istranspose)){
+        M=gcsym[i];
+    }
+    else if((isignum)&&(!istranspose)){
+        M=-gcsym[i]
+    }
+    else if((!isignum)&&(istranspose)){
+        Matrix3<double> tmp;
+        for(int iii=0;iii<3;iii++){
+            for(int jjj=0;jjj<3;jjj++){
+                tmp.Set(iii,jjj)=-b.Get(jjj,iii);
+            }
+        }
+        M=gcsym[i].dot(tmp);
+    }
+    else{
+        Matrix3<double> tmp;
+        for(int iii=0;iii<3;iii++){
+            for(int jjj=0;jjj<3;jjj++){
+                tmp.Set(iii,jjj)=b.Get(jjj,iii);
+            }
+        }
+        M=gcsym[i].dot(tmp);
+    }
+}
+
+Matrix4<double> TJ::q2bx(int q, const Matrix4<double> b){
+    Matrix4<double> bx;
+    if(q<1){
+        std::cout<<"Error: q less than 1"<<std::endl;
+        return bx;
+    }
+    else{
+        q=q-1;
+        int isignum=0;
+        if(q>=2*nselau*nselau){
+            Matrix4<double> bb= b.Transpose();
+            q=q-2*nselau*nselau;
+            if(q>=nselau*nselau){
+                q=q-nselau*nselau;
+                isignum=1;
+            }
+        }
+        else{
+            Matrix4<double> bb=b;
+            if(q>=nselau*nselau){
+                q=q-nselau*nselau;
+                isignum=1;
+            }
+        }
+        int i,j;
+        i=int(q/nselau);
+        j=q % nselau;
+        bx=bsym[i].dot(bb).dot(bsym[j]);
+        if(isignum==1){
+            bx.Set(0,3) = -bx.Get(0,3);
+            bx.Set(1,3) = -bx.Get(1,3);
+            bx.Set(2,3) = -bx.Get(2,3);
+            bx.Set(3,0) = -bx.Get(3,0);
+            bx.Set(3,1) = -bx.Get(3,1);
+            bx.Set(3,2) = -bx.Get(3,2);
+        }
+        return bx;
+    }
+}
+
+
 Matrix4<double> TJ::bconvert(const Matrix3<double> gx, const Vector3<double> xn){
     Matrix4<double> b;
     for(int ii=0;ii<3;ii++){
@@ -20,8 +245,6 @@ Matrix4<double> TJ::bconvert(const Matrix3<double> gx, const Vector3<double> xn)
     }
     double gtn[3];
     double gt[9];
-    TRANSPOSE_d3(gx,gt);
-    MATVEC_d3(gt,xn,gtn);
     Vector3<double> gtn= gx.Transpose().dot(xn);
     for(int jj=0;jj<3;jj++){
         b.Set(3,jj)=-gtn.Get(jj);
@@ -123,8 +346,8 @@ TJ::TJ(string filename){
     readTJ(cfg.tripleJunctionFileName);
     readSYM(cfg.symmetryFileName);
     subdomain.initialize(cfg.fmax,cfg.n,numGB,cfg.ksym);
-    idxcell= new unsigned int [numGB*ksym]();
-    Qs = new int [numGB*ksym]();
+    idxcell= new unsigned int [numGB*cfg.ksym]();
+    Qs = new int [numGB*cfg.ksym]();
 }
 
 void TJ::readTJ(string filename){
@@ -230,4 +453,12 @@ void TJ::readSYM(string filename){
     else{
         std::cout<<"Error opening: "<<filename<<std::endl;
     }
+}
+
+TJ::~TJ(){
+    delete idxcell;
+    delete Qs;
+    delete idxbs;
+    delete disbs;
+    delete Tranbs;
 }

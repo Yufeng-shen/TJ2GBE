@@ -36,18 +36,17 @@ class TJ{
         void readTJ(string filename);
         void readSYM(string filename);
         Matrix4<double> q2bx(int q, const Matrix4<double> b);
-        Matrix3<float> normal_transformer(int q, const Matrix4<double> b);
+        Matrix3<double> normal_transformer(int q, const Matrix4<double> b);
         void Addrow(int row,int col,float val);
     public:
         TJ(string filename);
         ~TJ();
         void cal_idxcell();
-        void write_idxcell(string filename);
-        void write_neighborInfo(string filename);
-        void write_binary();
+        void write_idxcell();
+        void write_neighborInfo();
         void find_neighbor();
-        void makeA();
-        void writeA();
+        void make_A();
+        void write_A();
 };
 
 #endif

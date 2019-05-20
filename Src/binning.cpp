@@ -260,26 +260,6 @@ void TJ::write_neighborInfo(std::string filename){
         std::cout<<"Error opening: "<<filename<<std::endl;
     }
 }
-void TJ::write_binary(){
-    std::ofstream outputFile("idxbs.binary",std::ios::binary);
-    if(outputFile.is_open()){
-        outputFile.write((char*) idxbs, 
-                numGB*maxNeighbor*sizeof(unsigned int));
-    }
-    outputFile.close();
-    std::ofstream outputFile2("disbs.binary",std::ios::binary);
-    if(outputFile2.is_open()){
-        outputFile2.write((char*) disbs, 
-                numGB*maxNeighbor*sizeof(float));
-    }
-    outputFile2.close();
-    std::ofstream outputFile3("Tranbs.binary",std::ios::binary);
-    if(outputFile3.is_open()){
-        outputFile3.write((char*) Tranbs, 
-                numGB*maxNeighbor*9*sizeof(float));
-    }
-    outputFile3.close();
-}
 
 void TJ::write_idxcell(std::string filename){
     std::ofstream outputFile(filename.c_str());

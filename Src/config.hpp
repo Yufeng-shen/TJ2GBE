@@ -18,6 +18,7 @@ class Config{
     public:
         string tripleJunctionFileName;
         string symmetryFileName;
+        string outputDir;
         unsigned int numTJ;
         int maxNeighbor;
         double threshold;

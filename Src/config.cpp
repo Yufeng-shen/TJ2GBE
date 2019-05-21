@@ -34,6 +34,7 @@ bool Config::Parse(const string & sBuf){
         "#", // comment
         "tripleJunctionFileName",
         "symmetryFileName",
+        "outputDir",
         "numTJ",
         "maxNeighbor",
         "threshold",
@@ -45,6 +46,7 @@ bool Config::Parse(const string & sBuf){
         Ecomment,
         EtripleJunctionFileName,
         EsymmetryFileName,
+        EoutputDir,
         EnumTJ,
         EmaxNeighbor,
         Ethreshold,
@@ -81,6 +83,10 @@ bool Config::Parse(const string & sBuf){
                 case EsymmetryFileName:
                     symmetryFileName = vsTokens[ii][1];
                     bKeywordCheck[EsymmetryFileName]=true;
+                    break;
+                case EoutputDir:
+                    outputDir = vsTokens[ii][1];
+                    bKeywordCheck[EoutputDir]=true;
                     break;
                 case EnumTJ:
                     numTJ = atol(vsTokens[ii][1].c_str());

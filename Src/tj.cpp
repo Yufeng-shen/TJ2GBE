@@ -86,7 +86,7 @@ void TJ::make_A(){
 }
 
 void TJ::write_idxcell(){
-    ofstream outputFile("idxcell.txt");
+    ofstream outputFile(cfg.outputDir+"idxcell.txt");
     if(outputFile.is_open()){
         for(unsigned int ii=0;ii<numGB;ii++){
             for(int jj=0;jj<cfg.ksym;jj++){
@@ -101,7 +101,7 @@ void TJ::write_idxcell(){
 }
 
 void TJ::write_neighborInfo(){
-    ofstream outputFile("idxbs.txt");
+    ofstream outputFile(cfg.outputDir+"idxbs.txt");
     if(outputFile.is_open()){
         for(unsigned int ii=0;ii<numGB;ii++){
             for(int jj=0;jj<cfg.maxNeighbor;jj++){
@@ -113,7 +113,7 @@ void TJ::write_neighborInfo(){
     else{
         std::cout<<"Writing idxbs.txt failed"<<std::endl;
     }
-    ofstream outputFile2("disbs.txt");
+    ofstream outputFile2(cfg.outputDir+"disbs.txt");
     if(outputFile2.is_open()){
         for(unsigned int ii=0;ii<numGB;ii++){
             for(int jj=0;jj<cfg.maxNeighbor;jj++){
@@ -125,7 +125,7 @@ void TJ::write_neighborInfo(){
     else{
         std::cout<<"Writing disbs.txt failed"<<std::endl;
     }
-    ofstream outputFile3("NN.txt");
+    ofstream outputFile3(cfg.outputDir+"NN.txt");
     if(outputFile3.is_open()){
         for(unsigned int ii=0;ii<numGB;ii++){
                 outputFile3 << NN[ii]<<std::endl;
@@ -134,7 +134,7 @@ void TJ::write_neighborInfo(){
     else{
         std::cout<<"Writing NN.txt failed"<<std::endl;
     }
-//    ofstream outputFile4("Tranbs.txt");
+//    ofstream outputFile4(cfg.outputDir+"Tranbs.txt");
 //    if(outputFile4.is_open()){
 //        for(unsigned int ii=0;ii<numGB;ii++){
 //            for(int jj=0;jj<cfg.maxNeighbor*9;jj++){
@@ -149,13 +149,13 @@ void TJ::write_neighborInfo(){
 }
 
 void TJ::write_A(){
-    ofstream rowFile("rowA.binary",std::ios::binary);
+    ofstream rowFile(outputDir+"rowA.binary",std::ios::binary);
     rowFile.write((char *)&rowA[0],rowA.size()*sizeof(int));
     rowFile.close();
-    ofstream colFile("colA.binary",std::ios::binary);
+    ofstream colFile(outputDir+"colA.binary",std::ios::binary);
     colFile.write((char *)&colA[0],colA.size()*sizeof(int));
     colFile.close();
-    ofstream valFile("valA.binary",std::ios::binary);
+    ofstream valFile(outputDir+"valA.binary",std::ios::binary);
     valFile.write((char *)&valA[0],valA.size()*sizeof(float));
     valFile.close();
 }

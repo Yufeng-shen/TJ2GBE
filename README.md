@@ -8,10 +8,14 @@ This is an implementation of the paper [Determining grain boundary energies from
 scipy
 matplotlib
 
-## Installation
-g++ -o ../build/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
-
 ## Usage
+
+```shell
+cd Src/
+g++ -o ../bin/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
+cd bin/
+./TJ2GBE.out ../CfgFile/Cubic.config
+```
 
 ## Notes
 

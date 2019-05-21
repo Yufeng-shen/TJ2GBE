@@ -160,13 +160,13 @@ void TJ::write_neighborInfo(){
 }
 
 void TJ::write_A(){
-    ofstream rowFile(outputDir+"rowA.binary",std::ios::binary);
+    ofstream rowFile(cfg.outputDir+"rowA.binary",std::ios::binary);
     rowFile.write((char *)&rowA[0],rowA.size()*sizeof(int));
     rowFile.close();
-    ofstream colFile(outputDir+"colA.binary",std::ios::binary);
+    ofstream colFile(cfg.outputDir+"colA.binary",std::ios::binary);
     colFile.write((char *)&colA[0],colA.size()*sizeof(int));
     colFile.close();
-    ofstream valFile(outputDir+"valA.binary",std::ios::binary);
+    ofstream valFile(cfg.outputDir+"valA.binary",std::ios::binary);
     valFile.write((char *)&valA[0],valA.size()*sizeof(float));
     valFile.close();
 }

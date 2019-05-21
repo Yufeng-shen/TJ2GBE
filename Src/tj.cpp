@@ -1,4 +1,14 @@
 #include "tj.hpp"
+#include <iomanip>
+
+void TJ::write_bs(){
+    ofstream outputFile(cfg.outputDir+"GBs.txt");
+    outputFile<<std::fixed;
+    for(long int ii=0;ii<numGB;ii++){
+        bs[ii].Print(outputFile);
+        outputFile<<std::endl;
+    }
+}
 
 void TJ::cal_idxcell(){
 #pragma omp parallel for
@@ -114,6 +124,7 @@ void TJ::write_neighborInfo(){
         std::cout<<"Writing idxbs.txt failed"<<std::endl;
     }
     ofstream outputFile2(cfg.outputDir+"disbs.txt");
+    outputFile2<<std::fixed;
     if(outputFile2.is_open()){
         for(unsigned int ii=0;ii<numGB;ii++){
             for(int jj=0;jj<cfg.maxNeighbor;jj++){

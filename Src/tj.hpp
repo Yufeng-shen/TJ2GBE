@@ -43,6 +43,7 @@ class TJ{
         TJ(string filename);
         ~TJ();
         void cal_idxcell();
+        void write_bs();
         void write_idxcell();
         void write_neighborInfo();
         void find_neighbor();

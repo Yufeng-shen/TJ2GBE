@@ -10,6 +10,7 @@ int main(int argc, char** argv){
         return 1;
     }
     TJ myTJ(argv[1]);
+    myTJ.write_bs(); // save 4x4 matrix for all grain boundaries
     myTJ.cal_idxcell();
     myTJ.write_idxcell(); // debug purpose
     myTJ.find_neighbor();

@@ -100,8 +100,8 @@ class Matrix3{
             }
             return res;
         }
-        void Print() const{
-            std::cout<<m[0][0]<<"\t"<<m[0][1]<<"\t"<<m[0][2]<<std::endl
+        void Print(std::ostream out) const{
+            out<<m[0][0]<<"\t"<<m[0][1]<<"\t"<<m[0][2]<<std::endl
             <<m[1][0]<<"\t"<<m[1][1]<<"\t"<<m[1][2]<<std::endl
             <<m[2][0]<<"\t"<<m[2][1]<<"\t"<<m[2][2]<<std::endl;
             return;
@@ -153,8 +153,8 @@ class Matrix4{
             }
             return res;
         }
-        void Print() const{
-            std::cout<<b[0][0]<<"\t"<<b[0][1]<<"\t"<<b[0][2]<<"\t"<<b[0][3]<<std::endl
+        void Print(std::ostream out) const{
+            out<<b[0][0]<<"\t"<<b[0][1]<<"\t"<<b[0][2]<<"\t"<<b[0][3]<<std::endl
             <<b[1][0]<<"\t"<<b[1][1]<<"\t"<<b[1][2]<<"\t"<<b[1][3]<<std::endl
             <<b[2][0]<<"\t"<<b[2][1]<<"\t"<<b[2][2]<<"\t"<<b[2][3]<<std::endl
             <<b[3][0]<<"\t"<<b[3][1]<<"\t"<<b[3][2]<<"\t"<<b[3][3]<<std::endl;

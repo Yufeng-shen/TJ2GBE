@@ -6,7 +6,9 @@ This is an implementation of the paper ["Determining grain boundary energies fro
 ## Dependencies
 
 -numpy
+
 -scipy
+
 -matplotlib
 
 ## Usage
@@ -26,7 +28,7 @@ There are two differences between the cell indexing in Morawiec's Fortran implem
 
 - In this implementation, cell index starts with 0 instead of 1.
 
-- In function "find\_symeq\_num", the second and fourth parameters are defined as "1-cos(af)" instead of "cos(af)"
+- In function "find\_symeq\_num", the second and fourth parameters are defined as "1-cos(af)" instead of "cos(af)".
 
 ## License
 __BSD 3 Cluase License__

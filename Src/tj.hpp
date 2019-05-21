@@ -13,8 +13,6 @@ using std::ofstream;
 
 class TJ{
     private:
-        Subdomain subdomain;
-        Config cfg;
         unsigned int * idxcell; // cell index of each GB, shape: (numGB,ksym)
         int * Qs; // idx in equivalent set, shape: (numGB, ksym)
         vector< Matrix4<double> > bs;
@@ -40,6 +38,8 @@ class TJ{
         Matrix3<double> normal_transformer(int q, const Matrix4<double> b);
         void Addrow(int row,int col,float val);
     public:
+        Subdomain subdomain;
+        Config cfg;
         TJ(string filename);
         ~TJ();
         void cal_idxcell();

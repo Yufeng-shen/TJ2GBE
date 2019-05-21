@@ -1,6 +1,9 @@
 #include "subdomain.hpp"
 #include <cmath>
 #include <algorithm>
+#include <fstream>
+
+using std::ofstream;
 
 void Subdomain::initialize(const double* fmax_, const int* n_,
         unsigned int numGB,  int numSym){
@@ -63,6 +66,15 @@ void Subdomain::count_each_cell(const unsigned int* idxcell,
         }
     }
     delete offset;
+}
+
+void Subdomain::write_cellInfo(){
+    ofstream numFile("num.binary",std::ios::binary);
+    numFile.write((char*)num, totaln*sizeof(unsigned int));
+    numFile.close();
+    ofstream idsFile("ids.binary",std::ios::binary);
+    idsFile.write((char*)ids, numGB*ksym*sizeof(unsigned int));
+    idsFile.close();
 }
 
 Subdomain::~Subdomain(){

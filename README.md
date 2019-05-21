@@ -9,7 +9,7 @@ scipy
 matplotlib
 
 ## Installation
-g++ -o TJ2GBE.out main.cpp binning.cpp -fopenmp
+g++ -o ../build/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
 
 ## Usage
 

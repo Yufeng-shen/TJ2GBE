@@ -22,6 +22,7 @@ class Subdomain{
         unsigned int neuler_to_cell(const double* af);
         bool in_subdomain(const double* af);
         void count_each_cell(const unsigned int* idxcell,const int* Qs);
+        void write_cellInfo();
 };
 
 #endif

@@ -145,6 +145,6 @@ void Config::PrintFile(){
         <<"max number of neighbors: "<<maxNeighbor<<std::endl
         <<"threshold for neighbors: "<<threshold<<std::endl
         <<"ksym: "<<ksym<<std::endl
-        <<"pi/(max Euler angle): "<<fmax[0]<<","<<fmax[1]<<","<<fmax[2]<<","<<fmax[3]<<","<<fmax[4]<<std::endl
+        <<"max Euler angle: "<<fmax[0]<<","<<fmax[1]<<","<<fmax[2]<<","<<fmax[3]<<","<<fmax[4]<<std::endl
         <<"number of divisions: "<<n[0]<<","<<n[1]<<","<<n[2]<<","<<n[3]<<","<<n[4]<<std::endl;
 }

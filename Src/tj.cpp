@@ -134,18 +134,18 @@ void TJ::write_neighborInfo(){
     else{
         std::cout<<"Writing NN.txt failed"<<std::endl;
     }
-    ofstream outputFile4("Tranbs.txt");
-    if(outputFile4.is_open()){
-        for(unsigned int ii=0;ii<numGB;ii++){
-            for(int jj=0;jj<cfg.maxNeighbor*9;jj++){
-                outputFile4 << Tranbs[ii*cfg.maxNeighbor*9+jj]<<"\t";
-            }
-            outputFile4 << std::endl;
-        }
-    }
-    else{
-        std::cout<<"Writing Tranbs.txt failed"<<std::endl;
-    }
+//    ofstream outputFile4("Tranbs.txt");
+//    if(outputFile4.is_open()){
+//        for(unsigned int ii=0;ii<numGB;ii++){
+//            for(int jj=0;jj<cfg.maxNeighbor*9;jj++){
+//                outputFile4 << Tranbs[ii*cfg.maxNeighbor*9+jj]<<"\t";
+//            }
+//            outputFile4 << std::endl;
+//        }
+//    }
+//    else{
+//        std::cout<<"Writing Tranbs.txt failed"<<std::endl;
+//    }
 }
 
 void TJ::write_A(){

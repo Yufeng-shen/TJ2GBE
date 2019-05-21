@@ -13,5 +13,9 @@ g++ -o TJ2GBE.out main.cpp binning.cpp -fopenmp
 
 ## Usage
 
+## Notes
+
+Comparing to Morawiec's code, when we indexing the cells, we start with 0 instead of 1. And we use af=1-cos(af) instead of af=cos(af) in function "find\_symeq\_num"
+
 ## License
 __BSD 3 Cluase License__

@@ -1,10 +1,10 @@
 ##############################################
 
 #number of TJ
-    60000
+    30000
 
 #TJ file
-    triples_60000.dat
+    ../TJdata/triples_30000.dat
 
 #maximum number of neighbors, usually 30 is fine
     30
@@ -15,7 +15,7 @@
 ###############################################
 
 #symmetry file
-    symmetry.prp
+    ../SymFile/Cubic.prp
 
 #subdomain: PI/a, PI/b, PI/c, PI/d, PI/e; 
     2   2   2   2   0.5

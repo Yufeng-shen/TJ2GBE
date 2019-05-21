@@ -1,4 +1,7 @@
 #include "config.hpp"
+#include "math.hpp"
+
+#include <stdlib.h>
 
 void Config::Tokenize(vector< vector<string> > & vsTokens, const string & sBuf, const string &sDelimiters){
     size_t iCurrentPos=0;
@@ -80,29 +83,29 @@ bool Config::Parse(const string & sBuf){
                     bKeywordCheck[EsymmetryFileName]=true;
                     break;
                 case EnumTJ:
-                    numTJ = std::stoi(vsTokens[ii][1]);
+                    numTJ = atol(vsTokens[ii][1].c_str());
                     bKeywordCheck[EnumTJ]=true;
                     break;
                 case EmaxNeighbor:
-                    maxNeighbor = std::stoi(vsTokens[ii][1]);
+                    maxNeighbor = atoi(vsTokens[ii][1].c_str());
                     bKeywordCheck[EmaxNeighbor]=true;
                     break;
                 case Ethreshold:
-                    threshold = std::stod(vsTokens[ii][1]);
+                    threshold = atof(vsTokens[ii][1].c_str());
                     bKeywordCheck[Ethreshold]=true;
                     break;
                 case Eksym:
-                    ksym = std::stoi(vsTokens[ii][1]);
+                    ksym = atoi(vsTokens[ii][1].c_str());
                     bKeywordCheck[Eksym]=true;
                     break;
                 case Efmax:
                     for(int jj=0;jj<5;jj++)
-                        fmax[jj]=std::stod(vsTokens[ii][jj+1]);
+                        fmax[jj]=PI/atof(vsTokens[ii][jj+1].c_str());
                     bKeywordCheck[Efmax]=true;
                     break;
                 case En:
                     for(int jj=0;jj<5;jj++)
-                        n[jj]=std::stoi(vsTokens[ii][jj+1]);
+                        n[jj]=atoi(vsTokens[ii][jj+1].c_str());
                     bKeywordCheck[En]=true;
                     break;
                 default:{

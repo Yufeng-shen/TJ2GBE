@@ -45,9 +45,9 @@ void TJ::find_neighbor(){
                             disbs[kk*cfg.maxNeighbor+nn]=x;
                             Matrix3<double> M2=normal_transformer(q,bs[bID]);
                             Matrix3<float> M=Minv.dot(M2);
-                            for(int iii=0;iii<3;iii++)
-                                for(int jjj=0;jjj<3;jjj++)
-                                    Tranbs[kk*cfg.maxNeighbor*9+nn*9+iii*3+jjj]=M.Get(iii,jjj);
+                            for(int iii=0;iii<3;iii++){
+                                for(int jjj=0;jjj<3;jjj++){
+                                    Tranbs[kk*cfg.maxNeighbor*9+nn*9+iii*3+jjj]=M.Get(iii,jjj);}}
                             nn+=1;
                         }
                     }
@@ -134,6 +134,18 @@ void TJ::write_neighborInfo(){
     else{
         std::cout<<"Writing NN.txt failed"<<std::endl;
     }
+    ofstream outputFile4("Tranbs.txt");
+    if(outputFile4.is_open()){
+        for(unsigned int ii=0;ii<numGB;ii++){
+            for(int jj=0;jj<cfg.maxNeighbor*9;jj++){
+                outputFile4 << Tranbs[ii*cfg.maxNeighbor*9+jj]<<"\t";
+            }
+            outputFile4 << std::endl;
+        }
+    }
+    else{
+        std::cout<<"Writing Tranbs.txt failed"<<std::endl;
+    }
 }
 
 void TJ::write_A(){
@@ -190,6 +202,7 @@ Matrix3<double> TJ::normal_transformer(int q, const Matrix4<double> b){
         }
         M=gcsym[i].dot(tmp);
     }
+    return M;
 }
 
 Matrix4<double> TJ::q2bx(int q, const Matrix4<double> b){

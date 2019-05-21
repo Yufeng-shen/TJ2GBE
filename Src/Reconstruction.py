@@ -150,7 +150,7 @@ if np.sum(resE<0)/float(len(resE))>0.5:
     
 print("fraction of negative energy: ",np.sum(resE<0)/float(len(resE)))
 
-np.save(prefix+'resE.npy',resE)
+np.savetxt(prefix+'resE.txt',resE)
 
 
 ###########################################################################

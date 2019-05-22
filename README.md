@@ -38,7 +38,7 @@ python Reconstruction.py
 ```
 It will output the reconstructed energy for every grain boundary in the data set and a .gbdat file for plotting.
 
-For the example data in TJfile/triples\_30000.dat, the reconstructed grain boundary energy function with $\Sigma 7$ misorientation is shown as following:
+For the example data of "TJdata/triples\_30000.dat", the reconstructed grain boundary energy function with <!-- \Sigma --> misorientation is shown as following:
 ![Sigma7](https://github.com/Yufeng-shen/TJ2GBE/blob/master/misc/Sigma7.png)
 
 ## Notes

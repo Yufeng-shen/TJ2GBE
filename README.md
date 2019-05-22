@@ -24,7 +24,7 @@ g++ -o ../bin/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
 
 Step 2: Execute the compile file.
 ```shell
-cd bin/
+cd ../bin/
 ./TJ2GBE.out ../CfgFile/Cubic.config
 ```
 The output files "rowA.binary", "colA.binary" and "valA.binary" are going to be used by Pythoon reconstruction script, other files are for debugging and tunning the hyperparameters in the configure file.

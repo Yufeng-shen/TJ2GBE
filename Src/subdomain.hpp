@@ -1,6 +1,8 @@
 #ifndef TJ2GBE_SUBDOMAIN_HPP
 #define TJ2GBE_SUBDOMAIN_HPP
 
+#include <string>
+
 
 class Subdomain{
     private:
@@ -22,7 +24,7 @@ class Subdomain{
         unsigned int neuler_to_cell(const double* af);
         bool in_subdomain(const double* af);
         void count_each_cell(const unsigned int* idxcell,const int* Qs);
-        void write_cellInfo();
+        void write_cellInfo(std::string outDir);
 };
 
 #endif

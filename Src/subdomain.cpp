@@ -68,11 +68,11 @@ void Subdomain::count_each_cell(const unsigned int* idxcell,
     delete offset;
 }
 
-void Subdomain::write_cellInfo(){
-    ofstream numFile("num.binary",std::ios::binary);
+void Subdomain::write_cellInfo(std::string outDir){
+    ofstream numFile(outDir+"num.binary",std::ios::binary);
     numFile.write((char*)num, totaln*sizeof(unsigned int));
     numFile.close();
-    ofstream idsFile("ids.binary",std::ios::binary);
+    ofstream idsFile(outDir+"ids.binary",std::ios::binary);
     idsFile.write((char*)ids, numGB*ksym*sizeof(unsigned int));
     idsFile.close();
 }

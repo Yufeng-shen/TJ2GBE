@@ -8,15 +8,15 @@ class Subdomain{
     private:
         double fmax [5]; // subdomain max
         double afrange [5]; // subdomain range
-        int    ndiv [5]; // number of cells in each dimension
-        int totaln;
-        unsigned int numGB;
+        int    ndiv [5]; // number of cells in each dimension of the subdomain
+        int totaln; // total number of cells
+        unsigned int numGB; // number of grain boundaries
         int ksym;
     public:
         unsigned int * num; // number of GB in cells
         unsigned int * cumnum;
         unsigned int * ids; // GB IDs in cells
-        int * qs;
+        int * qs; 
 
         void initialize(const double* fmax_, const int* n_,
                 unsigned int numGB, int numSym);

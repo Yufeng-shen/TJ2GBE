@@ -12,9 +12,9 @@ int main(int argc, char** argv){
     TJ myTJ(argv[1]);
     myTJ.write_bs(); // save 4x4 matrix for all grain boundaries
     myTJ.cal_idxcell();
-    myTJ.write_idxcell(); // debug purpose
+//    myTJ.write_idxcell(); // debug purpose
     myTJ.find_neighbor();
-    myTJ.subdomain.write_cellInfo(); // GB ids in each cell
+//    myTJ.subdomain.write_cellInfo(); // GB ids in each cell
     myTJ.write_neighborInfo(); // to varify the threshold value is proper
     myTJ.make_A();
     myTJ.write_A(); // input for python script for energy reconstruction

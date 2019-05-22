@@ -111,31 +111,31 @@ void TJ::write_idxcell(){
 }
 
 void TJ::write_neighborInfo(){
-    ofstream outputFile(cfg.outputDir+"idxbs.txt");
-    if(outputFile.is_open()){
-        for(unsigned int ii=0;ii<numGB;ii++){
-            for(int jj=0;jj<cfg.maxNeighbor;jj++){
-                outputFile << idxbs[ii*cfg.maxNeighbor+jj]<<"\t";
-            }
-            outputFile << std::endl;
-        }
-    }
-    else{
-        std::cout<<"Writing idxbs.txt failed"<<std::endl;
-    }
-    ofstream outputFile2(cfg.outputDir+"disbs.txt");
-    outputFile2<<std::fixed;
-    if(outputFile2.is_open()){
-        for(unsigned int ii=0;ii<numGB;ii++){
-            for(int jj=0;jj<cfg.maxNeighbor;jj++){
-                outputFile2 << disbs[ii*cfg.maxNeighbor+jj]<<"\t";
-            }
-            outputFile2 << std::endl;
-        }
-    }
-    else{
-        std::cout<<"Writing disbs.txt failed"<<std::endl;
-    }
+//    ofstream outputFile(cfg.outputDir+"idxbs.txt");
+//    if(outputFile.is_open()){
+//        for(unsigned int ii=0;ii<numGB;ii++){
+//            for(int jj=0;jj<cfg.maxNeighbor;jj++){
+//                outputFile << idxbs[ii*cfg.maxNeighbor+jj]<<"\t";
+//            }
+//            outputFile << std::endl;
+//        }
+//    }
+//    else{
+//        std::cout<<"Writing idxbs.txt failed"<<std::endl;
+//    }
+//    ofstream outputFile2(cfg.outputDir+"disbs.txt");
+//    outputFile2<<std::fixed;
+//    if(outputFile2.is_open()){
+//        for(unsigned int ii=0;ii<numGB;ii++){
+//            for(int jj=0;jj<cfg.maxNeighbor;jj++){
+//                outputFile2 << disbs[ii*cfg.maxNeighbor+jj]<<"\t";
+//            }
+//            outputFile2 << std::endl;
+//        }
+//    }
+//    else{
+//        std::cout<<"Writing disbs.txt failed"<<std::endl;
+//    }
     ofstream outputFile3(cfg.outputDir+"NN.txt");
     if(outputFile3.is_open()){
         for(unsigned int ii=0;ii<numGB;ii++){

@@ -1,4 +1,18 @@
-# modified from original scipy module
+"""
+Locally Optimal Block Preconditioned Conjugate Gradient Method (LOBPCG).
+References
+----------
+.. [1] A. V. Knyazev (2001),
+       Toward the Optimal Preconditioned Eigensolver: Locally Optimal
+       Block Preconditioned Conjugate Gradient Method.
+       SIAM Journal on Scientific Computing 23, no. 2,
+       pp. 517-541. http://dx.doi.org/10.1137/S1064827500366124
+.. [2] A. V. Knyazev, I. Lashuk, M. E. Argentati, and E. Ovchinnikov (2007),
+       Block Locally Optimal Preconditioned Eigenvalue Xolvers (BLOPEX)
+       in hypre and PETSc.  https://arxiv.org/abs/0705.2626
+.. [3] A. V. Knyazev's C and MATLAB implementations:
+       https://bitbucket.org/joseroman/blopex
+"""
 
 from __future__ import division, print_function, absolute_import
 

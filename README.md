@@ -1,7 +1,9 @@
 # TJ2GBE
 Reconstruct grain boundary energy from triple junction geometries [1,2].
 
-This package is an implementation of the regularization based reconstruction method which is described in paper [1]. It consists of two parts: 
+This package is an implementation of the regularization based reconstruction method, which is described in paper [1]. Many functions are borrowed from Adam Morawiec's Fortran implementation of his paper [2]. Moreover, the file "Src/myLOBPCG\_new.py" is [scipy's implementation](https://github.com/scipy/scipy/blob/v1.3.0/scipy/sparse/linalg/eigen/lobpcg/lobpcg.py) with minor modification. 
+
+This package consists of two parts: 
   *  C++ code that finds the "similar grain boundaries" of every grain boundary in the data set
   *  Python script that solves the optimization problem described in paper [1] to reconstruct the energy of every grain boundary in the data set
 
@@ -38,8 +40,9 @@ python Reconstruction.py
 ```
 It will output the reconstructed energy for every grain boundary in the data set and a .gbdat file for plotting.
 
-For the example data of "TJdata/triples\_30000.dat", the reconstructed grain boundary energy function with &Sigma; 7 misorientation is shown as following:
+For the example data of "TJdata/triples\_30000.dat", the reconstructed grain boundary energy function with &Sigma;7 misorientation is shown as following:
 ![Sigma7](https://github.com/Yufeng-shen/TJ2GBE/blob/master/misc/Sigma7.png)
+Figures are plotted by a modified version of Krzysztof Glowinski's [GBToolbox](http://imim.pl/personal/adam.morawiec/A_Morawiec_Web_Page/S/K_Glowinski/Downloads.html).
 
 ## Notes
 

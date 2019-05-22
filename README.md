@@ -13,10 +13,14 @@ The development of this package was supported by the National Science Foundation
 ## Dependencies
 
 - numpy
+```
+pip install numpy
+```
 
 - scipy
-
-- matplotlib
+```
+pip install scipy
+```
 
 ## Usage
 
@@ -26,14 +30,14 @@ cd Src/
 g++ -o ../bin/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
 ```
 
-Step 2: Execute the compile file.
+Step 2: Run the executable file with configure file.
 ```shell
 cd ../bin/
 ./TJ2GBE.out ../CfgFile/Cubic.config
 ```
-The output files "rowA.binary", "colA.binary" and "valA.binary" are going to be used by Pythoon reconstruction script, other files are for debugging and tunning the hyperparameters in the configure file.
+The output files "rowA.binary", "colA.binary" and "valA.binary" are going to be used by Pythoon reconstruction script, the "NN.txt" is used for tunning the "threshold" value in the configure file.
 
-Step 3: Run the reconstruction script.
+Step 3: Change the parameters (at the top of the script) and run the reconstruction script.
 ```shell
 cd ../Src/
 python Reconstruction.py

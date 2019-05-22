@@ -1,6 +1,12 @@
 # TJ2GBE
-Reconstruct grain boundary energy from triple junction geometries [1].
+Reconstruct grain boundary energy from triple junction geometries [1,2].
 
+This package is an implementation of the regularization based reconstruction method which is described in paper [1]. It consists of two parts: 
+  *  C++ code that finds the "similar grain boundaries" of every grain boundary in the data set
+  *  Python script that solves the optimization problem described in paper [1] to reconstruct the energy of every grain boundary in the data set
+
+## Financial Support
+The development of this package was supported by the National Science Foundation of the United States of America under grant DMR-1628994.
 
 ## Dependencies
 
@@ -11,10 +17,6 @@ Reconstruct grain boundary energy from triple junction geometries [1].
 - matplotlib
 
 ## Usage
-
-This code consists of two parts: 
-  *  C++ code which finds the "neighboring grain boundaries" of every grain boundary in the data set
-  *  Python script solves the optimization problem described in paper [1]
 
 Step 1: Compile the C++ code.
 ```shell
@@ -35,6 +37,9 @@ cd ../Src/
 python Reconstruction.py
 ```
 It will output the reconstructed energy for every grain boundary in the data set and a .gbdat file for plotting.
+
+For the example data in TJfile/triples\_30000.dat, the reconstructed grain boundary energy function with $\Sigma 7$ misorientation is shown as following:
+![Sigma7](https://github.com/Yufeng-shen/TJ2GBE/blob/master/misc/Sigma7.png)
 
 ## Notes
 

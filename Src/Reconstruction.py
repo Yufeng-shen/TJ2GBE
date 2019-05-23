@@ -134,10 +134,12 @@ valA=None
 
 
 X0=Norm.ravel().reshape(-1,1)
+print("initial loss of |AX|^2 (smoothness): \n", np.sum((A.dot(X0))**2))
+print("initial loss of |BX|^2 (consistency with Herring's equation): \n", np.sum((B.dot(X0))**2))
 res2=myLOBPCG_new.lobpcg(A,lamb*B,X0,verbosityLevel=0,largest=False,maxiter=500,retLambdaHistory=True)
 print("number of lobpcg iterations: ",len(res2[2]))
 print("residual loss of |AX|^2: ", np.sum((A.dot(res2[1]))**2))
-print("residual loss of |lamb*BX|^2: ", np.sum((lamb*B.dot(res2[1]))**2))
+print("residual loss of |BX|^2: ", np.sum((B.dot(res2[1]))**2))
 
 
 

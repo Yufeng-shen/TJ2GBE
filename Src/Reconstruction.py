@@ -189,16 +189,16 @@ with open(fn,'w') as text_file:
         text_file.write(
     """# This file was created by GBToolbox 1.1.20151207
 # It contains boundary parameters imported from DREAM.3D output files
-EXP
-6/mmm
-L_PHI1 L_PHI L_PHI2 R_PHI1 R_PHI R_PHI2 ZENITH AZIMUTH CORRELAT AREA\n""")
+# EXP
+# 6/mmm
+# L_PHI1 L_PHI L_PHI2 R_PHI1 R_PHI R_PHI2 ZENITH AZIMUTH CORRELAT AREA\n""")
     elif sym=='Cubic':
         text_file.write(
     """# This file was created by GBToolbox 1.1.20151207
 # It contains boundary parameters imported from DREAM.3D output files
-EXP
-m-3m
-L_PHI1 L_PHI L_PHI2 R_PHI1 R_PHI R_PHI2 ZENITH AZIMUTH CORRELAT AREA\n""")
+# EXP
+# m-3m
+# L_PHI1 L_PHI L_PHI2 R_PHI1 R_PHI R_PHI2 ZENITH AZIMUTH CORRELAT AREA\n""")
     else:
         print("sym must be Cubic or Hex")
 np.savetxt(open(fn,'a'), toPrint, delimiter=',', fmt='%3.4f '*8+'%4d '+'%3.7f')

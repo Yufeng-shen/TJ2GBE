@@ -48,6 +48,7 @@ class TJ{
         void write_neighborInfo();
         void find_neighbor();
         void make_A();
+        void make_A_energy();
         void write_A();
 };
 

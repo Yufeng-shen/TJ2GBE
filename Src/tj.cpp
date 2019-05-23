@@ -95,6 +95,26 @@ void TJ::make_A(){
     }
 }
 
+void TJ::make_A_energy(){
+    int row_i=0;
+    for(int kk=0;kk<numGB;kk++){
+        Matrix4<double> bk=bs[kk];
+        for(int ii=0;ii<NN[kk];ii++){
+            int idx=idxbs[kk*cfg.maxNeighbor+ii];
+            Matrix4<double> bidx=bs[idx];
+            float dis=disbs[kk*cfg.maxNeighbor+ii];
+            float w=sqrt((1-dis/cfg.threshold+EPS)/NN[kk]);
+            Addrow(row_i,kk*3,-w*bk.Get(0,3));
+            Addrow(row_i,kk*3+1,-w*bk.Get(1,3));
+            Addrow(row_i,kk*3+2,-w*bk.Get(2,3));
+            Addrow(row_i,idx*3,w*bidx.Get(0,3));
+            Addrow(row_i,idx*3+1,w*bidx.Get(1,3));
+            Addrow(row_i,idx*3+2,w*bidx.Get(2,3));
+            row_i+=1;
+        }
+    }
+}
+
 void TJ::write_idxcell(){
     ofstream outputFile(cfg.outputDir+"idxcell.txt");
     if(outputFile.is_open()){

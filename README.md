@@ -24,22 +24,27 @@ pip install scipy
 
 ## Usage
 
+Step 0: Download the code.
+```shell
+git clone --depth=1 https://github.com/Yufeng-shen/TJ2GBE.git
+```
+
 Step 1: Compile the C++ code.
 ```shell
-cd Src/
-g++ -o ../bin/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
+cd Src/Cpp/
+g++ -o ../../bin/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
 ```
 
 Step 2: Run the executable file with configure file.
 ```shell
-cd ../bin/
+cd ../../bin/
 ./TJ2GBE.out ../CfgFile/Cubic.config
 ```
 The output files "rowA.binary", "colA.binary" and "valA.binary" are going to be used by Pythoon reconstruction script, the "NN.txt" is used for tunning the "threshold" value in the configure file.
 
 Step 3: Change the parameters (at the top of the script) and run the reconstruction script.
 ```shell
-cd ../Src/
+cd ../Src/Python/
 python Reconstruction.py
 ```
 It will output the reconstructed energy for every grain boundary in the data set and a .gbdat file for plotting.

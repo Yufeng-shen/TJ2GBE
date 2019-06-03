@@ -60,6 +60,6 @@ There are two differences between the cell indexing in Morawiec's Fortran implem
 __BSD 3 Cluase License__
 
 ## References
-[1]  ["Determining grain boundary energies from triple junction geometries without discretizing the five-parameter space"](https://doi.org/10.1016/j.actamat.2018.12.022) Acta Materialia 166, 126-134
+[1]  ["Determining grain boundary energies from triple junction geometries without discretizing the five-parameter space"](https://doi.org/10.1016/j.actamat.2018.12.022) Acta Materialia 166, 126-134 (2019).
 
 [2]  ["Method to calculate the grain boundary energy distribution over the space of macroscopic boundary parameters from the geometry of triple junctions"](https://doi.org/10.1016/S1359-6454(00)00126-9) Acta Materialia, 48 (2000) 3525-3532

@@ -16,7 +16,7 @@ int main(int argc, char** argv){
     myTJ.find_neighbor();
 //    myTJ.subdomain.write_cellInfo(myTJ.cfg.outDir); // GB ids in each cell
     myTJ.write_neighborInfo(); // to varify the threshold value is proper
-    myTJ.make_A_energy();
+    myTJ.make_A;
     myTJ.write_A(); // input for python script for energy reconstruction
     return 0;
 }

@@ -7,6 +7,7 @@
 *.o
 *.binary
 *.txt
+*.gbdat
 
 .ipynb_checkpoints/
 test.cpp

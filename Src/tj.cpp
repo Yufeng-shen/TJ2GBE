@@ -351,8 +351,11 @@ void TJ::find_symeq_num(const Matrix4<double> b, int ksym,
             matrix_to_param(bx,af,isignum);
             testor=subdomain.in_subdomain(af);
             if(testor){
-                af[1]=1-cos(af[1]);
-                af[3]=1-cos(af[3]);
+                // other code use these cell indices, I personally prefer 1 - cos()
+                af[1]=cos(af[1]);
+                af[3]=cos(af[3]);
+//                af[1]=1-cos(af[1]);
+//                af[3]=1-cos(af[3]);
                 nsymeq+=1;
                 if(nsymeq==ksym){return;}
                 idxs[nsymeq]=subdomain.neuler_to_cell(af);
@@ -362,8 +365,11 @@ void TJ::find_symeq_num(const Matrix4<double> b, int ksym,
             matrix_to_param(bx,af,isignum);
             testor=subdomain.in_subdomain(af);
             if(testor){
-                af[1]=1-cos(af[1]);
-                af[3]=1-cos(af[3]);
+                // other code use these cell indices, I personally prefer 1 - cos()
+                af[1]=cos(af[1]);
+                af[3]=cos(af[3]);
+//                af[1]=1-cos(af[1]);
+//                af[3]=1-cos(af[3]);
                 nsymeq+=1;
                 if(nsymeq==ksym){return;}
                 idxs[nsymeq]=subdomain.neuler_to_cell(af);

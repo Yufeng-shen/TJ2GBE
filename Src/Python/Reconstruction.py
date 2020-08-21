@@ -24,7 +24,7 @@ fn= prefix+'Cub.gbdat' # the name of output gbdat file
 
 def read_dat(datFile, numTJ):
     """
-    Input: triples.dat, wrote from the fortran program Torq_trn
+    Input: triples.dat, wrote from the fortran program Torq_gen
                 size=[numTJ*8,]
                 In each group, the data is [TJ directon, EA1, GB1, EA2, GB2, EA3, GB3]
     Output: TJs, direction of the triple junctions

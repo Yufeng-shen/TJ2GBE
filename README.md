@@ -30,9 +30,10 @@ git clone --depth=1 https://github.com/Yufeng-shen/TJ2GBE.git
 ```
 
 Step 1: Compile the C++ code.
+(Thanks to @sgbaird, we find that C++11 is required)
 ```shell
 cd Src/Cpp/
-g++ -o ../../bin/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
+g++ -std=c++11 -o ../../bin/TJ2GBE.out main.cpp tj.cpp subdomain.cpp config.cpp -fopenmp
 ```
 
 Step 2: Run the executable file with configure file.

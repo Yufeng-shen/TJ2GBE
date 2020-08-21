@@ -3,9 +3,10 @@ Reconstruct grain boundary energy from triple junction geometries [1,2].
 
 This package is an implementation of the regularization based reconstruction method, which is described in paper [1]. Many functions are borrowed from Adam Morawiec's Fortran implementation of his paper [2]. Moreover, the file "Src/myLOBPCG\_new.py" is [scipy's implementation](https://github.com/scipy/scipy/blob/v1.3.0/scipy/sparse/linalg/eigen/lobpcg/lobpcg.py) with minor modification. 
 
-This package consists of two parts: 
+This package consists of three parts: 
   *  C++ code that finds the "similar grain boundaries" of every grain boundary in the data set
   *  Python script that solves the optimization problem described in paper [1] to reconstruct the energy of every grain boundary in the data set
+  *  Fortran code that generates the simulated triple junction file. This code is mostly written by Adam Morawiec.
 
 ## Financial Support
 The development of this package was supported by the National Science Foundation of the United States of America under grant DMR-1628994.
@@ -53,6 +54,23 @@ It will output the reconstructed energy for every grain boundary in the data set
 For the example data of "TJdata/triples\_30000.dat", the reconstructed grain boundary energy function with &Sigma;7 misorientation is shown as following:
 ![Sigma7](https://github.com/Yufeng-shen/TJ2GBE/blob/master/misc/Sigma7.png)
 Figures are plotted by a modified version of Krzysztof Glowinski's [GBToolbox](http://imim.pl/personal/adam.morawiec/A_Morawiec_Web_Page/S/K_Glowinski/Downloads.html).
+
+## Generate the triples.dat file
+
+Compile the fortran code
+```shell
+cd Src/Fortran/minuit-master
+make
+cd ..
+gfortran -o Torq_gen.out -l minuit -Lminuit-master
+```
+
+Run the simulation
+```shell
+./Torq_gen.out filename 10
+```
+where "filename" is the filename of the output, it must be 8 letters, "10" is the number of triple junctions, can be any number. This program will generate the ground truth file along with the triple junctions file.
+
 
 ## Notes
 
